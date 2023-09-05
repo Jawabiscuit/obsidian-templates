@@ -2,7 +2,7 @@
 const dv = app.plugins.plugins["dataview"].api;
 let today = tp.user.prefixed_date(tp.file.title);
 let query = `
-    LIST from "content/posts"
+    LIST from "chat" or "reference" or "confluence"
     WHERE file.day = date("${today}")
     SORT file.name DESC
 `;
