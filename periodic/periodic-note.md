@@ -1,30 +1,15 @@
 <%*
 // Begin Declarations
+const path = require("path");
 const dv = app.plugins.plugins["dataview"].api;
-const regex = /^(\d{4}-\d{2}-\d{2})/;
+const title = tp.file.title;
+const folder = tp.file.folder(relative=true);
+const dirname = path.basename(folder);
+const type = "journal";
+const series = true;
 
-let title = tp.file.title;
-let type = "journal";
-let status = "ip";
-let series = true;
-let tags = "daily";
+let tags = [];
 // End Declarations
--%>
-<%*
-// Begin Prompts
-status = await tp.system.suggester(
-    items=["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
-    text_items=["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
-);
-
-// daily, weekly, monthly, quarterly, yearly
-// work (5 business day work week, default: 7)
-tags = await tp.system.prompt(
-    `Tags (space separated) 
-    Choices: daily, weekly, monthly, quarterly, yearly, work`,
-    tags
-);
-// End Prompts
 -%>
 <%*
 // Begin Functions
@@ -39,11 +24,57 @@ function capitalize_words (arr) {
 }
 // End Functions
 -%>
+<%*
+// Begin Prompts
+const status = await tp.system.suggester(
+    items=["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
+    text_items=["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
+);
+
+const p_dirs = ["daily", "weekly", "monthly", "quarterly", "yearly"]; 
+
+let period;
+for (let p of p_dirs) {
+    if (p == "daily") {
+        if (dirname == p) {
+            period = "d";
+        }
+    }
+    if (p == "weekly") {
+        if (dirname == p) {
+            period = "w";
+        }
+    }
+    if (p == "monthly") {
+        if (dirname == p) {
+            period = "m";
+        }
+    }
+    if (p == "quarterly") {
+        if (dirname == p) {
+            period = "q";
+        }
+    }
+    if (p == "yearly") {
+        if (dirname == p) {
+            period = "y";
+        }
+    }
+}
+
+const tags_chosen = await tp.system.prompt("Tags (space separated)");
+if (tags_chosen && !tags_chosen.split(" ").includes(dirname)) {
+    tags = [dirname].concat(tags_chosen.split(" "));
+} else if (dirname && period) {
+    tags = [dirname];
+}
+// End Prompts
+-%>
 <%* tR += "---" %>
 title: <% title %>
 type: <% type %>
-status: <%status %>
-tags: <% tags %>
+status: <% status %>
+tags: [<% tags.join(", ") %>]
 series: <% series %>
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>
@@ -51,10 +82,10 @@ modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %
 <%*
 // Begin Progress Bar
 let progress;
-let file_date = new Date(title.match(regex)[1] + "T00:00");
-
-if (tp.user.word_in_tags("daily", tags)) {
-    if (tp.user.word_in_tags("work", tags)) {
+let file_date = new Date(title.match(/^(\d{4}-\d{2}-\d{2})/)[1] + "T00:00");
+log(tags);
+if (period == "d") {
+    if (tags.includes("work")) {
         // 5 workdays
         progress = tp.user.make_progress_bar(file_date.getDay(), 5, size=5, label="Progress");
     } else {
@@ -76,16 +107,22 @@ let prev_date;
 let next_note;
 let num_days = 1;
 let today = tp.date.now("YYYY-MM-DD", 0, title, "YYYY-MM-DD");
-let folder = tp.file.folder(relative=true);
 
-if (tp.user.word_in_tags("weekly", tags)) {
-    num_days = 7;
-} else if (tp.user.word_in_tags("monthly", tags)) {
-    num_days = 30;
-} else if (tp.user.word_in_tags("quarterly", tags)) {
-    num_days = 90;
-} else if (tp.user.word_in_tags("yearly", tags)) {
-    num_days = 365;
+switch (period) {
+    case "d":
+        break;
+    case "w":
+        num_days = 7;
+        break;
+    case "m":
+        num_days = 30;
+        break;
+    case "q":
+        num_days = 90;
+        break;
+    case "y":
+        num_days = 365;
+        break;
 }
 
 prev_note = await dv.queryMarkdown(
@@ -129,8 +166,8 @@ tR += `◀ [[${prev_note}]] | [[${next_note}]] ▶`;
 
 <%*
 // Begin Includes
-if (tp.user.word_in_tags("daily", tags)) {
-    tR += `
+if (tags.includes("daily")) {
+    tR += `\
 ## 📓 Journal
 
 ## 🍗 Inputs
@@ -144,8 +181,8 @@ if (tp.user.word_in_tags("daily", tags)) {
 ## 🔗 Backlinks
 
 `;
-} else if (tp.user.word_in_tags("weekly", tags)) {
-    tR += `
+} else if (tags.includes("weekly")) {
+    tR += `\
 ## 🆕 Notes Created
 
 ## 🍗 Inputs
@@ -159,8 +196,8 @@ if (tp.user.word_in_tags("daily", tags)) {
 ## 📥 Action Items
 
 `;
-} else if (tp.user.word_in_tags("monthly", tags)) {
-    tR += `
+} else if (tags.includes("monthly")) {
+    tR += `\
 ## 🏆 Brag
 
 ## 🆕 Notes Created
@@ -174,8 +211,8 @@ if (tp.user.word_in_tags("daily", tags)) {
 ## 📥 Action Items
 
 `;
-} else if (tp.user.word_in_tags("quarterly", tags)) {
-    tR += `
+} else if (tags.includes("quarterly")) {
+    tR += `\
 ## 🏆 Brag
 
 ## 🍗 Inputs
@@ -187,8 +224,8 @@ if (tp.user.word_in_tags("daily", tags)) {
 ## 📥 Action Items
 
 `;
-} else if (tp.user.word_in_tags("yearly", tags)) {
-    tR += `
+} else if (tags.includes("yearly")) {
+    tR += `\
 ## 🏆 Brag
 
 ## 🍗 Inputs
