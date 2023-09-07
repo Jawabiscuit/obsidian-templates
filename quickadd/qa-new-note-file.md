@@ -3,10 +3,9 @@
 const dv = app.plugins.plugins["dataview"].api;
 
 let title = tp.file.title;
-let type = "journal";
-let status = "ip";
 let series = false;
-let tags;
+let tags = [];
+
 // End Declarations
 -%>
 <%*
@@ -26,35 +25,38 @@ function capitalize_words (arr) {
 // Begin Prompts
 title = await tp.system.prompt("Title", title.toLowerCase());
 
-type = await tp.system.suggester(
-    ["journal", "reference", "meeting", "document"],
-    ["journal", "reference", "meeting", "document"],
-);
+const types = ["journal", "reference", "meeting", "document"]
+const type = await tp.system.suggester(types, types);
 
 // Set series
 if (type == "journal") {
     series = true;
-}
-else if (type == "meeting") {
+} else if (type == "meeting") {
     answer = await tp.system.prompt("Series? (\"Y/n\")", "y");
     if (answer == "y") {
         series = true;
     }
 }
 
-status = await tp.system.suggester(
-    items=["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
-    text_items=["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
+const statuses = {
+    "waiting": "wtg",
+    "in-progress": "ip",
+    "finished": "fin",
+    "hold": "hld",
+    "complete": "cmpt",
+    "blocked": "blkd",
+    "n/a": "na"
+};
+const status = await tp.system.suggester(
+    items=Object.keys(statuses),
+    text_items=Object.values(statuses)
 );
 
-tags = await tp.system.prompt(
-    "Tags (space separated)"
-);
-
-if (type == "meeting") {
-    if (!tp.user.word_in_tags("meeting", tags)) {
-        tags += " meeting";
-    }
+const tags_chosen = await tp.system.prompt("Tags (space separated)");
+if (tags_chosen && !tags_chosen.split(" ").includes(type)) {
+    tags = [type].concat(tags_chosen.split(" "));
+} else {
+    tags = [type];
 }
 // End Prompts
 -%>
@@ -82,10 +84,10 @@ else if (type == "document") {
 // End Organization
 -%>
 <%* tR += "---" %>
-title: <%* tR += title %>
+title: <% title %>
 type: <% type %>
 status: <% status %>
-tags: <% tags %>
+tags: [<% tags.join(", ") %>]
 series: <% series %>
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>
@@ -96,7 +98,7 @@ let progress;
 let file_date = new Date(title.match(/^(\d{4}-\d{2}-\d{2})/)[1] + "T00:00");
 
 if (series) {
-    if (tp.user.word_in_tags("work", tags)) {
+    if (tags.includes("work")) {
         // 5 workdays
         progress = tp.user.make_progress_bar(file_date.getDay(), 5, size=5, label="Progress");
     } else {
@@ -121,10 +123,10 @@ primary_heading = capitalize_words(fname_without_date.split("-")).join(" ");
 # <% primary_heading %>
 <%*
 // Begin Navigation
+const folder = tp.file.folder(relative=true);
+
 let prev_note;
 let next_note;
-
-let folder = tp.file.folder(relative=true);
 
 if (series) {
     prev_note = await dv.queryMarkdown(
@@ -161,13 +163,15 @@ if (series) {
     }
     
     tR += `◀ [[${prev_note}]] | [[${next_note}]] ▶\n`;
+} else {
+    tR += "\n";
 }
 // End Navigation
 -%>
 <%*
-// Begin Includes
-if (tp.user.word_in_tags("standup", tags)) {
-    tR += `
+// Begin File Include
+if (tags.includes("standup")) {
+    tR += `\
 ## 👷🚧 Updates
 
 ### ◀ [[${prev_note}#👷🚧 Updates|Previous]]
@@ -205,8 +209,8 @@ if (tp.user.word_in_tags("standup", tags)) {
 
 ^${today}-action-items
 `;
-} else if (tp.user.word_in_tags("1on1", tags)) {
-    tR += `
+} else if (tags.includes("1on1")) {
+    tR += `\
 ## ⌛ Prep
 
 - 
@@ -214,7 +218,7 @@ if (tp.user.word_in_tags("standup", tags)) {
 ## 🕚 Minutes
 `;
     if (series) {
-        tR += `
+        tR += `\
 ### ◀ [[${prev_note}#🕚 Minutes|Previous]]
 
 ![[${prev_note}#^${prev_date}-minutes]]
@@ -222,7 +226,7 @@ if (tp.user.word_in_tags("standup", tags)) {
 ### 🕚 Today
 `;
 }
-    tR += `
+    tR += `\
 - 
 
 ^${today}-minutes
@@ -246,7 +250,7 @@ if (tp.user.word_in_tags("standup", tags)) {
 ^${today}-action-items
 `;
 } else if (type == "journal") {
-    tR += `
+    tR += `\
 ## 📓 Journal
 
 ## 🍗 Inputs
@@ -261,7 +265,7 @@ if (tp.user.word_in_tags("standup", tags)) {
 
 `;
 } else if (type == "meeting") {
-    tR += `
+    tR += `\
 ## 👨‍💼 Attendance
 
 ## 🕚 Minutes
@@ -272,7 +276,7 @@ if (tp.user.word_in_tags("standup", tags)) {
 
 `;
 } else if (type == "reference") {
-    tR += `
+    tR += `\
 ## 📥 Action Items
 
 ## 🔗 Backlinks
