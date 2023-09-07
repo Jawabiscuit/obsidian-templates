@@ -67,11 +67,10 @@ const type = await tp.system.suggester(
 // End Prompts
 -%>
 <%*
-let num_days = 1;
+let num_days = 0;
 
 switch (period) {
     case "d":
-        num_days = 1;
         break;
     case "w":
         num_days = 7;
@@ -90,6 +89,19 @@ switch (period) {
 <%*
 let query;
 let suffix;
+
+const folders = [
+    "chat",
+    "journal",
+    "meeting",
+    "reference",
+    "confluence",
+    "canvas",
+    "dataview",
+    "excalidraw",
+];
+
+quoted_folders = folders.map(folder => `"${folder}"`).join(" OR ");
 
 switch (type) {
     case "n":
@@ -122,16 +134,19 @@ switch (type) {
         break;
     case "o":
         query = `
-            LIST from "chat" or "reference" or "confluence"
+            LIST
+            FROM ${quoted_folders}
             WHERE file.day <= date("${today}")
-            WHERE file.day >= date("${today}") - dur(${num_days} days)
+            AND file.day >= date("${today}") - dur(${num_days} days)
+            AND file.name != this.file.name
             SORT file.name DESC
         `;
         suffix = "outputs";
         break;
     case "j":
         query = `
-            LIST from "journal"
+            LIST
+            FROM "journal"
             WHERE file.name != this.file.name
             WHERE file.day <= date("${today}")
             WHERE file.day >= date("${today}") - dur(7 days)
