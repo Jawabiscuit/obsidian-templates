@@ -1,0 +1,22 @@
+- Review Notes
+- Read News
+- Job Boards
+- Researching
+    - Industry and pipeline tools
+    - Obsidian tools
+    - AI
+- Sharpening skills
+    - USD
+    - Programming languages
+- Resume
+- Interview Prep
+    - Behavioral Questions
+- Website
+    - Portfolio
+    - Drafts
+    - CD
+- Editing
+    - Portfolio content
+- Side Project
+    - Brainstorm / Collect ideas
+    - Develop

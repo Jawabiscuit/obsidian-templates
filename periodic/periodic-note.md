@@ -26,9 +26,18 @@ function capitalize_words (arr) {
 -%>
 <%*
 // Begin Prompts
+const statuses = {
+    "waiting": "wtg",
+    "in-progress": "ip",
+    "finished": "fin",
+    "hold": "hld",
+    "complete": "cmpt",
+    "blocked": "blkd",
+    "n/a": "na"
+};
 const status = await tp.system.suggester(
-    items=["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
-    text_items=["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
+    items=Object.keys(statuses),
+    text_items=Object.values(statuses)
 );
 
 const p_dirs = ["daily", "weekly", "monthly", "quarterly", "yearly"]; 
@@ -83,7 +92,7 @@ modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %
 // Begin Progress Bar
 let progress;
 let file_date = new Date(title.match(/^(\d{4}-\d{2}-\d{2})/)[1] + "T00:00");
-log(tags);
+
 if (period == "d") {
     if (tags.includes("work")) {
         // 5 workdays
@@ -251,3 +260,20 @@ const random_note3 = files[random3];
 - [ ] [[<% random_note1.basename %>]]
 - [ ] [[<% random_note2.basename %>]]
 - [ ] [[<% random_note3.basename %>]]
+## ✔ Status Check
+<%*
+tR += `\
+\`\`\`dataview
+LIST
+FROM "journal"
+WHERE !econtains(status, "fin") AND !econtains(status, "na") AND !econtains(status, "journal")
+\`\`\`
+`;
+-%>
+<%*
+if (period == "d") {
+    tR += `\
+## 📥 Tasks
+`;
+}
+-%>

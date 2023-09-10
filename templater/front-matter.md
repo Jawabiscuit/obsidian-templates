@@ -1,47 +1,79 @@
 <%*
-let type = await tp.system.suggester(
-    ["journal", "meeting", "reference", "dataview", "document", "audio", "video", "chat"],
-    ["journal", "meeting", "reference", "dataview", "document", "audio", "video", "chat"],
+// Begin Declarations
+const path = require("path");
+const folder = tp.file.folder(relative=true);
+const dirname = path.basename(folder);
+// End Declarations
+-%>
+<%*
+// Begin Functions
+function log(msg) {
+    console.log(msg);
+}
+// End Functions
+-%>
+<%*
+// Begin Prompts
+const types = [
+    "audio",
+    "chat",
+    "dataview",
+    "document",
+    "journal",
+    "meeting",
+    "reference",
+    "video",
+];
+let type;
+for (let t of types) {
+    if (dirname == t) {
+        type = t;
+    }
+}
+if (!type) {
+    type = await tp.system.suggester(
+        Object.keys(types), Object.values(types)
+    );
+}
+
+const statuses = {
+    "waiting": "wtg",
+    "in-progress": "ip",
+    "finished": "fin",
+    "hold": "hld",
+    "complete": "cmpt",
+    "blocked": "blkd",
+    "n/a": "na"
+};
+const status = await tp.system.suggester(
+    items=Object.keys(statuses),
+    text_items=Object.values(statuses)
 );
 
-let status = await tp.system.suggester(
-    ["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
-    ["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
-);
-
-// daily, weekly, monthly, quarterly, yearly
-// work (5 business day work week, default: 7)
-let tags = await tp.system.prompt(
-    "Tags (space separated)"
-);
+let tags = [];
+const tags_chosen = await tp.system.prompt("Tags (space separated)");
+if (tags_chosen && !tags_chosen.split(" ").includes(type)) {
+    tags = [type].concat(tags_chosen.split(" "));
+} else {
+    tags = [type];
+}
 
 let series = false;
-
-if (type == "meeting") {
-    answer = await tp.system.prompt("Series? (\"Y/n\")", "y");
-    if (answer == "y") {
-        series = true;
-    }
-    if (!tp.user.word_in_tags("meeting", tags)) {
-        tags += " meeting"
-    }
-}
-
 if (type == "journal") {
+    series = true;
+} else if (type == "meeting") {
     answer = await tp.system.prompt("Series? (\"Y/n\")", "y");
     if (answer == "y") {
         series = true;
     }
-    if (!tp.user.word_in_tags("journal", tags)) {
-        tags += " journal"
-    }
 }
-%>
+// End Prompts
+-%>
 <%* tR += "---" %>
 title: <% tp.file.title %>
 type: <% type %>
 status: <% status %>
-tags: <% tags %>
+tags: [<% tags.join(", ") %>]
 series: <% series %>
 created: <% tp.file.creation_date("YYYY-MM-DD HH:mm") %>
 modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>

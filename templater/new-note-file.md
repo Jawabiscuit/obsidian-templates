@@ -51,7 +51,6 @@ if (tags_chosen && !tags_chosen.split(" ").includes(type)) {
 } else {
     tags = [type];
 }
-log(tags);
 // End Prompts
 -%>
 <%*

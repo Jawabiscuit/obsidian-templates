@@ -1,11 +1,13 @@
 <%*
 // Begin Declarations
+const path = require("path");
 const dv = app.plugins.plugins["dataview"].api;
+const folder = tp.file.folder(relative=true);
+const dirname = path.basename(folder);
 
 let title = tp.file.title;
 let series = false;
 let tags = [];
-
 // End Declarations
 -%>
 <%*
@@ -25,10 +27,21 @@ function capitalize_words (arr) {
 // Begin Prompts
 title = await tp.system.prompt("Title", title.toLowerCase());
 
-const types = ["journal", "reference", "meeting", "document"]
-const type = await tp.system.suggester(types, types);
+const types = [
+    "journal",
+    "reference",
+    "meeting",
+];
+let type;
+for (let t of types) {
+    if (dirname == t) {
+        type = t;
+    }
+}
+if (!type) {
+    type = await tp.system.suggester(types, types);
+}
 
-// Set series
 if (type == "journal") {
     series = true;
 } else if (type == "meeting") {
@@ -123,8 +136,6 @@ primary_heading = capitalize_words(fname_without_date.split("-")).join(" ");
 # <% primary_heading %>
 <%*
 // Begin Navigation
-const folder = tp.file.folder(relative=true);
-
 let prev_note;
 let next_note;
 
@@ -285,4 +296,3 @@ if (tags.includes("standup")) {
 }
 // End Includes
 -%>
-
