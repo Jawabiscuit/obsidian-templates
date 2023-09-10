@@ -1,6 +1,0 @@
-
-## 💡 Capture
-
-- 
-
-## 💬 Spinoff Convo(s)

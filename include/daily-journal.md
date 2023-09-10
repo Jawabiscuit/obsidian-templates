@@ -1,6 +1,0 @@
-
-## 📓 Journal
-
-## 💩 Outputs
-
-## 📥 Action Items
