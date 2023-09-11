@@ -1,11 +1,9 @@
 <%*
 // Variable Declarations
-
-let title = tp.file.title;
-let type = "reference";
-let status = "ip";
-let tags;
-
+const type = "book";
+const title = tp.file.title;
+const series = false;
+let tags = [];
 // End Declarations
 -%>
 <%*
@@ -26,19 +24,27 @@ function capitalize_words (arr) {
 <%*
 // Prompt for title, status, and tags
 
-title = await tp.system.prompt("Title", title.toLowerCase());
+// title = await tp.system.prompt("Title", title.toLowerCase());
 
-status = await tp.system.suggester(
-    items=["waiting", "in-progress", "finished", "hold", "complete", "blocked", "n/a"],
-    text_items=["wtg", "ip", "fin", "hld", "cmpt", "blkd", "na"]
+const statuses = {
+    "waiting": "wtg",
+    "in-progress": "ip",
+    "finished": "fin",
+    "hold": "hld",
+    "complete": "cmpt",
+    "blocked": "blkd",
+    "n/a": "na"
+};
+const status = await tp.system.suggester(
+    items=Object.keys(statuses),
+    text_items=Object.values(statuses)
 );
 
-tags = await tp.system.prompt(
-    "Tags (space separated)"
-);
-
-if (!tp.user.word_in_tags("book", tags)) {
-    tags += " book";
+const tags_chosen = await tp.system.prompt("Tags (space separated)");
+if (tags_chosen && !tags_chosen.split(" ").includes(type)) {
+    tags = [type].concat(tags_chosen.split(" "));
+} else {
+    tags = [type];
 }
 // End Prompt
 -%>
@@ -46,31 +52,27 @@ if (!tp.user.word_in_tags("book", tags)) {
 title: <% title %>
 type: <% type %>
 status: <% status %>
-tags: <% tags %>
-aliases:
-    - <% tp.file.title.replace('{ ', '') %>
-cssclass:
+tags: [<% tags.join(", ") %>]
+series: <% series %>
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>
 <%* tR += "---" %>
 <%*
 // Begin Primary Heading
-
 let today = tp.date.now("YYYY-MM-DD", 0, title, "YYYY-MM-DD");
 
 fname_without_date = title.split(today + "-")[1];
 primary_heading = capitalize_words(fname_without_date.split("-")).join(" ");
-
 // End Primary Heading
 -%>
 # <% primary_heading %>
 
 ## Metadata
-
 author:: {{VALUE:author}}
 reference::
 rating::
 reviewed date:: [[<%tp.date.now("gggg-MM-DD - ddd MMM D")%>]]
 finished year:: [[<%tp.date.now("gggg")%>]]
-
 ## Thoughts
 
 ## Actions Taken / Changes
