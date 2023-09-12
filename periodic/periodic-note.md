@@ -270,10 +270,3 @@ WHERE !econtains(status, "fin") AND !econtains(status, "na") AND !econtains(stat
 \`\`\`
 `;
 -%>
-<%*
-if (period == "d") {
-    tR += `\
-## 📥 Tasks
-`;
-}
--%>
