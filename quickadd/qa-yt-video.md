@@ -1,4 +1,3 @@
-
 <%*
 let url = await tp.system.clipboard();
 let page = await tp.obsidian.request({url});
@@ -8,8 +7,9 @@ let $ = s => doc.querySelector(s);
 
 let fileName = $("meta[property='og:title']").content;
 let qcFileName = fileName.replace(/:/g, "-");
-qcFileName = qcFileName.replace(/#/g, "");
-qcFileName = qcFileName.replace(/\?/g, "");
+qcFileName = qcFileName.replace(/\?|\||#|‘|’/g, "");
+//qcFileName = qcFileName.replace(/#/g, "");
+//qcFileName = qcFileName.replace(/\?/g, "");
 titleName = qcFileName;
 
 qcFileName = qcFileName.replace(/ /g, "-");
@@ -27,7 +27,8 @@ let hours = Math.floor(Number(minutes) / 60);
 minutes = (Number(minutes) % 60);
 duration = `${timeStr(minutes)}:${timeStr(seconds)}`;
 if (hours > 0) {duration = `${timeStr(hours)}:` + duration}
-
+-%>
+<%*
 tR += "---";
 %>
 title: <%* tR += titleName %>
@@ -39,8 +40,8 @@ url: <%
 $("link[rel='shortLinkUrl']").href %>
 channel: <%
 $("link[itemprop='name']").getAttribute("content") %>
-published: <%
-$("meta[itemprop='uploadDate']").content.slice(0, 4) %>
+published: "<%
+$("meta[itemprop='uploadDate']").content.slice(0, 4) %>"
 duration: <% duration %>
 <%*
 tR += "---";
@@ -54,3 +55,5 @@ $("meta[itemprop='uploadDate']").content.slice(0, 4) %>)](<%
 $("link[rel='shortLinkUrl']").href %>)
 
 ![](<% $("meta[property='og:url']").content.split('&')[0] %>)
+
+<% tp.system.clipboard() %>
