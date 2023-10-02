@@ -249,8 +249,6 @@ if (tags.includes("standup")) {
     tR += `\
 ## 📓 Journal
 
-## 🍗 Inputs
-
 ## 💩 Outputs
 
 ## 💡 Capture

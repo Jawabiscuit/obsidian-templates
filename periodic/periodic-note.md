@@ -179,8 +179,6 @@ if (tags.includes("daily")) {
     tR += `\
 ## 📓 Journal
 
-## 🍗 Inputs
-
 ## 💩 Outputs
 
 ## 💡 Capture
@@ -193,8 +191,6 @@ if (tags.includes("daily")) {
 } else if (tags.includes("weekly")) {
     tR += `\
 ## 🆕 Notes Created
-
-## 🍗 Inputs
 
 ## 💩 Outputs
 
@@ -211,8 +207,6 @@ if (tags.includes("daily")) {
 
 ## 🆕 Notes Created
 
-## 🍗 Inputs
-
 ## 💩 Outputs
 
 ## 💡 Capture
@@ -224,8 +218,6 @@ if (tags.includes("daily")) {
     tR += `\
 ## 🏆 Brag
 
-## 🍗 Inputs
-
 ## 💩 Outputs
 
 ## 💡 Capture
@@ -236,8 +228,6 @@ if (tags.includes("daily")) {
 } else if (tags.includes("yearly")) {
     tR += `\
 ## 🏆 Brag
-
-## 🍗 Inputs
 
 ## 💩 Outputs
 
@@ -256,7 +246,6 @@ const random1 = Math.floor(Math.random() * (files.length - 1)); const random2 = 
 const random_note2 = files[random2];
 const random_note3 = files[random3];
 -%>
-
 - [ ] [[<% random_note1.basename %>]]
 - [ ] [[<% random_note2.basename %>]]
 - [ ] [[<% random_note3.basename %>]]
