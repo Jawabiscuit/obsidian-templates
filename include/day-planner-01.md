@@ -1,10 +1,18 @@
 ## 📆 Day Planner
-- 09:00 - 10:00 📰 News & Jobs
-- 10:00 - 11:00 🔮 Notes
+- 08:30 - 08:50 Free
+- 09:00 - 10:50 ✏ Skills P1
+    - Unreal C++
 - 11:00 - 12:00 💪 Work Out
 - 12:00 - 12:30 🍗 Lunch
+- 12:30 - 14:00  ✏ Skills P2
 - 12:30 - 14:00 💬 Interview Prep
+    - CTCI
 - 12:30 - 14:00 🌐 Website
-- 14:00 - 16:00 ✏ Skills
-- 16:00 - 17:00 🚗 Errands
+    - Blog
+- 14:10 - 15:30 🔮 Planning
+    - Review
+    - Plan
+    - Notes
+- 15:40 - 17:00 📰 News & Jobs
+- 15:40 - 17:00 🚗 Errands
 - 17:30 - 18:30 ✍ Review
