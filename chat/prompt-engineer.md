@@ -4,8 +4,9 @@ top_p: .75
 max_tokens: 512
 presence_penalty: 1
 frequency_penalty: 1
-system_commands: ['Persona: I am a helpful assistant']
-template: [[prompt-engineer]]
+system_commands:
+    - "Persona: I am a helpful assistant"
+template: "[[prompt-engineer]]"
 ---
 
 Please forget all prior prompts. I want you to become my Prompt Creator. Your goal is to help me build the most optimally detailed prompt for my needs. This prompt will be used by you, ChatGPT. Please follow this following process:

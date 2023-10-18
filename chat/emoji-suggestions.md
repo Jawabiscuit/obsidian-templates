@@ -8,7 +8,7 @@ stream: true
 stop: null
 n: 1
 model: gpt-3.5-turbo
-template: [[emoji-suggestions]]
+template: "[[emoji-suggestions]]"
 ---
 
 List 10 alternatives for emojis that best fit the word "{WORD}".

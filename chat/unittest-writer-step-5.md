@@ -5,8 +5,9 @@ top_p: 1
 max_tokens: 2048
 presence_penalty: 0
 frequency_penalty: 0
-system_commands: ['You are a programming expert tasked with investigating code and tests that are generated from large language models. List the flaws and faulty logic in the code using your predicted outcome of the tests. Your analysis will be used to generate better code.']
-template: [[unittest-writer-step-5]]
+system_commands:
+    - "You are a programming expert tasked with investigating code and tests that are generated from large language models. List the flaws and faulty logic in the code using your predicted outcome of the tests. Your analysis will be used to generate better code."
+template: "[[unittest-writer-step-5]]"
 ---
 
 ## Python Code

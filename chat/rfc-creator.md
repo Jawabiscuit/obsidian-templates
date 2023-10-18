@@ -1,5 +1,6 @@
 ---
-system_commands: ['I am a helpful assistant']
+system_commands:
+    - "I am a helpful assistant"
 temperature: 0.3
 top_p: 1
 max_tokens: 1024
@@ -9,7 +10,7 @@ stream: true
 stop: null
 n: 1
 model: gpt-4
-template: [[rfc-creator]]
+template: "[[rfc-creator]]"
 ---
 
 You are an RFC writer. An RFC is a "Request for Comments". This is a democratic way of proposing technical changes into a Visual Effects pipeline. Other technical colleagues can have a chance to review and make suggestions for improvements. Your task is to write up a persuasive proposal and provide a believable, realistic plan for how to implement the changes. This is the template for an RFC written in Markdown:

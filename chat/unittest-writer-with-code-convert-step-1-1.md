@@ -5,11 +5,11 @@ top_p: 1
 max_tokens: 2048
 presence_penalty: 0
 frequency_penalty: 0
-system_commands: ['You are an AI programming assistant and a world-class Python developer with an eagle eye for unintended bugs and edge cases. You carefully explain code with great detail and accuracy. You follow the user's requirements carefully & to the letter.']
+system_commands:
+    - "You are an AI programming assistant and a world-class Python developer with an eagle eye for unintended bugs and edge cases. You carefully explain code with great detail and accuracy. You follow the user's requirements carefully & to the letter."
 source: https://github.com/openai/openai-cookbook/blob/main/examples/Unit_test_writing_using_a_multi-step_prompt.ipynb
-template: [[unittest-writer-step-1]]
-help: Example usage--Replace {LANGUAGE_1} with "C" or "Python" and replace {LANGUAGE_2} with the destination language. Replace {CONTEXT} with extra information for the LLM to do its job better. Delete {CONTEXT} if you are starting without having any additional context.
-template: [[unittest-writer-with-code-convert-step-1-1]]
+help: 'Example usage: Replace {LANGUAGE_1} with "C" or "Python" and replace {LANGUAGE_2} with the destination language. Replace {CONTEXT} with extra information for the LLM to do its job better. Delete {CONTEXT} if you are starting without having any additional context.'
+template: "[[unittest-writer-with-code-convert-step-1-1]]"
 ---
 
 Question: Convert this {LANGUAGE_1} function to {LANGUAGE_2}. Write good idiomatic python code using the expressive features of the language like list comprehensions where appropriate. Prefer for-loops instead of while-loops and avoid overly nested code.

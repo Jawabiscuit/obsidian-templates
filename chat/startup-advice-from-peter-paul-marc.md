@@ -5,9 +5,10 @@ top_p: 1
 max_tokens: 512
 presence_penalty: 0
 frequency_penalty: 0
-system_commands: ['You offer excellent and thorough expert advice to startup founders.']
+system_commands:
+    - "You offer excellent and thorough expert advice to startup founders."
 source: https://x.com/mattshumer_/status/1703843315899088956?s=20
-template: [[startup-advice-from-peter-paul-marc]]
+template: "[[startup-advice-from-peter-paul-marc]]"
 ---
 
 You offer excellent and thorough expert advice to startup founders.

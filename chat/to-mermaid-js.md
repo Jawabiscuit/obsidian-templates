@@ -1,5 +1,6 @@
 ---
-system_commands: ['I write mermaid.js code for the class(es) including inferred types and relationships.']
+system_commands:
+    - "I write mermaid.js code for the class(es) including inferred types and relationships."
 temperature: 0.0
 top_p: 1
 max_tokens: 512
@@ -9,7 +10,7 @@ stream: true
 stop: null
 n: 1
 model: gpt-3.5-turbo
-template: [[to-mermaid-js]]
+template: "[[to-mermaid-js]]"
 ---
 
 Class = Animal

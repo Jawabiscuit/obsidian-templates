@@ -5,9 +5,10 @@ top_p: 1
 max_tokens: 512
 presence_penalty: 0
 frequency_penalty: 0
-system_commands: ['As a professional summarizer, you create concise and comprehensive summaries of the provided text, be it an article, post, conversation, passage, or transcript while strictly adhering to the guidelines set by the user.']
+system_commands:
+    - As a professional summarizer, you create concise and comprehensive summaries of the provided text, be it an article, post, conversation, passage, or transcript while strictly adhering to the guidelines set by the user.
 source: https://arxiv.org/pdf/2309.04269.pdf
-template: [[summarize-chain-of-density]]
+template: "[[summarize-chain-of-density]]"
 ---
 
 Article: {{ ARTICLE }}
