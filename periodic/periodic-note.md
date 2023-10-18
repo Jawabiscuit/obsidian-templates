@@ -178,21 +178,17 @@ tR += `◀ [[${prev_note}]] | [[${next_note}]] ▶`;
 if (tags.includes("daily")) {
     tR += `\
 ## 📓 Journal
-
-## 💩 Outputs
-
+%%Project::%%
 ## 💡 Capture
 
 ## 📥 Action Items
 
-## 🔗 Backlinks
-
 `;
 } else if (tags.includes("weekly")) {
     tR += `\
+## 📓 Journal
+%%Projects::%%
 ## 🆕 Notes Created
-
-## 💩 Outputs
 
 ## 🧛‍♂🧛‍♀ Meetings
 
@@ -205,9 +201,10 @@ if (tags.includes("daily")) {
     tR += `\
 ## 🏆 Brag
 
+## 📓 Journal
+%%Projects::%%
+%%what worked, what didn't%%
 ## 🆕 Notes Created
-
-## 💩 Outputs
 
 ## 💡 Capture
 
@@ -218,8 +215,9 @@ if (tags.includes("daily")) {
     tR += `\
 ## 🏆 Brag
 
-## 💩 Outputs
-
+## 📓 Journal
+%%Projects::%%
+%%what worked, what didn't%%
 ## 💡 Capture
 
 ## 📥 Action Items
@@ -229,8 +227,10 @@ if (tags.includes("daily")) {
     tR += `\
 ## 🏆 Brag
 
-## 💩 Outputs
-
+## 📓 Journal
+%%Projects::%%
+%%Goals::%%
+%%what worked, what didn't%%
 ## 💡 Capture
 
 ## 📥 Action Items
@@ -249,13 +249,3 @@ const random_note3 = files[random3];
 - [ ] [[<% random_note1.basename %>]]
 - [ ] [[<% random_note2.basename %>]]
 - [ ] [[<% random_note3.basename %>]]
-## ✔ Status Check
-<%*
-tR += `\
-\`\`\`dataview
-LIST
-FROM "journal"
-WHERE !econtains(status, "fin") AND !econtains(status, "na") AND !econtains(status, "journal")
-\`\`\`
-`;
--%>
