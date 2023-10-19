@@ -263,7 +263,7 @@ if (tags.includes("standup")) {
 } else if (type == "journal") {
     tR += `\
 ## 📓 Journal
-%%Project::%%
+%%project::%%
 ## 💡 Capture
 
 ## 📥 Action Items
@@ -282,7 +282,7 @@ if (tags.includes("standup")) {
 `;
 } else if (type == "reference") {
     tR += `\
-%%Project::%%
+%%project::%%
 ## 📥 Action Items
 
 `;
