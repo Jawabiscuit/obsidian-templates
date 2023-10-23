@@ -52,7 +52,7 @@ const journals = dv.current().file.inlinks.where(p => { const mp = dv.page(p.pat
 
 if (journals.length > 0)
 {
-    dv.header(4, journals.length > 1 ? "📓 Journals" : "📓 Journal");
+    dv.header(2, journals.length > 1 ? "📓 Journals" : "📓 Journal");
     dv.list(journals)
 }
 ```
@@ -61,7 +61,7 @@ const resources = dv.current().file.inlinks.where(p => { const mp = dv.page(p.pa
 
 if (resources.length > 0)
 {
-    dv.header(4, "🔗 Resources");
+    dv.header(2, "🔗 Resources");
     dv.list(resources)
 }
 ```
