@@ -46,7 +46,7 @@ if (shouldProjectTrackProgress)
 ```
 %%
 `$= dv.view('total-progress-bar', {file: '{{DATE}}-{{VALUE:🏗 New Project}}'})`
-# 🏗 {{VALUE:♊ Project Alias}}
+# {{VALUE:♊ Project Alias}}
 ```dataviewjs
 const journals = dv.current().file.inlinks.where(p => { const mp = dv.page(p.path); return (mp.tags?.includes('journal') || mp.type === 'journal')});
 

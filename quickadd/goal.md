@@ -19,7 +19,7 @@ progress:: `$= dv.view('progress', {file: '{{DATE}}-{{VALUE:🎯 Goal}}'})`
 target:: `$= dv.view('target', {file: '{{DATE}}-{{VALUE:🎯 Goal}}'})`
 bar:: `$= dv.view('total-progress-bar', {file: '{{DATE}}-{{VALUE:🎯 Goal}}'})`
 %%
-# 🎯 {{VALUE:♊ Goal Alias}}
+# {{VALUE:♊ Goal Alias}}
 
 ## 🖼 What Does Success Look Like
 
