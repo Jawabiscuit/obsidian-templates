@@ -30,7 +30,7 @@ if (shouldConnectToGoal)
         targetGoalFile,
         ""
     );
-    markdownLink = `${markdownLink.slice(0, markdownLink.length - 2)}|${targetGoal.aliases[targetGoal.aliases.length - 1]}${markdownLink.slice(markdownLink.length - 2)}`;
+    markdownLink = `${markdownLink.slice(0, markdownLink.length - 2)}|${targetGoal.aliases[0]}${markdownLink.slice(markdownLink.length - 2)}`;
     return `goal:: ${markdownLink}`;
 } else {
     return "goal:: ";
