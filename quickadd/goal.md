@@ -2,7 +2,7 @@
 title: {{VALUE:♊ Goal Alias}}
 reason: {{VALUE:Why this goal?}}
 type: goal
-status: {{VALUE:wtg,ip,fin,hld,cmpt,blkd,na}}
+status: {{VALUE:todo,wtg,ip,fin,hld,cmpt,blkd,na}}
 tags: goal
 series: false
 created: {{DATE:"YYYY-MM-DD HH:mm"}}

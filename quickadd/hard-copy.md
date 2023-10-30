@@ -27,6 +27,7 @@ function capitalize_words (arr) {
 // title = await tp.system.prompt("Title", title.toLowerCase());
 
 const statuses = {
+    "todo": "todo",
     "waiting": "wtg",
     "in-progress": "ip",
     "finished": "fin",
@@ -35,10 +36,11 @@ const statuses = {
     "blocked": "blkd",
     "n/a": "na"
 };
-const status = await tp.system.suggester(
-    items=Object.keys(statuses),
-    text_items=Object.values(statuses)
-);
+const status = type != "reference" ? await
+    tp.system.suggester(
+        items=Object.keys(statuses),
+        text_items=Object.values(statuses)
+    ) : null;
 
 const tags_chosen = await tp.system.prompt("Tags (space separated)");
 if (tags_chosen && !tags_chosen.split(" ").includes(type)) {

@@ -2,7 +2,7 @@
 title: {{VALUE:♊ Project Alias}}
 subtitle: {{VALUE:Project Subtitle}}
 type: project
-status: {{VALUE:wtg,ip,fin,hld,cmpt,blkd,na}}
+status: {{VALUE:todo,wtg,ip,fin,hld,cmpt,blkd,na}}
 tags:
     - project
 series: false
@@ -22,7 +22,9 @@ if (shouldConnectToGoal)
         (p) => !p.file.path.includes("template")
     ).values;
     const targetGoal = await this.quickAddApi.suggester(
-        goalNotes.map((p) => p.file.name),
+        goalNotes.map((p) => (
+            p.file.aliases.length ? p.file.aliases[0] : p.file.name)
+            ),
         goalNotes
     );
     const targetGoalFile = app.vault.getAbstractFileByPath(targetGoal.file.path);
@@ -44,8 +46,9 @@ if (shouldProjectTrackProgress)
     return "bar:: `$= dv.view('total-progress-bar', {file: '{{DATE}}-{{VALUE:🏗 New Project}}'})`";
 }
 ```
+img::
 %%
-`$= dv.view('total-progress-bar', {file: '{{DATE}}-{{VALUE:🏗 New Project}}'})`
+`=this.bar`
 # {{VALUE:♊ Project Alias}}
 ```dataviewjs
 const journals = dv.current().file.inlinks.where(p => { const mp = dv.page(p.path); return (mp.tags?.includes('journal') || mp.type === 'journal')});

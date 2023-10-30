@@ -27,6 +27,7 @@ function capitalize_words (arr) {
 <%*
 // Begin Prompts
 const statuses = {
+    "todo": "todo",
     "waiting": "wtg",
     "in-progress": "ip",
     "finished": "fin",
@@ -35,10 +36,11 @@ const statuses = {
     "blocked": "blkd",
     "n/a": "na"
 };
-const status = await tp.system.suggester(
-    items=Object.keys(statuses),
-    text_items=Object.values(statuses)
-);
+const status = type != "reference" ? await
+    tp.system.suggester(
+        items=Object.keys(statuses),
+        text_items=Object.values(statuses)
+    ) : null;
 
 const p_dirs = ["daily", "weekly", "monthly", "quarterly", "yearly"]; 
 
