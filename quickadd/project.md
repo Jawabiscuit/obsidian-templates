@@ -1,5 +1,4 @@
 ---
-title: {{VALUE:♊ Project Alias}}
 subtitle: {{VALUE:Project Subtitle}}
 type: project
 status: {{VALUE:todo,wtg,ip,fin,hld,cmpt,blkd,na}}
@@ -50,23 +49,11 @@ img::
 %%
 `=this.bar`
 # {{VALUE:♊ Project Alias}}
-```dataviewjs
-const journals = dv.current().file.inlinks.where(p => { const mp = dv.page(p.path); return (mp.tags?.includes('journal') || mp.type === 'journal')});
-
-if (journals.length > 0)
-{
-    dv.header(2, journals.length > 1 ? "📓 Journals" : "📓 Journal");
-    dv.list(journals)
-}
-```
-```dataviewjs
-const resources = dv.current().file.inlinks.where(p => { const mp = dv.page(p.path); return (mp.type === 'reference' || mp.type === 'video' || mp.type === 'document')});
-
-if (resources.length > 0)
-{
-    dv.header(2, "🔗 Resources");
-    dv.list(resources)
-}
-```
+%%
+journal::`$= dv.view('section', {file: '{{DATE}}-{{VALUE:🏗 New Project}}', searchTerm: 'journal', headerName: 'Journal', headerNamePlural: 'Journals', icon: '📓'})`
+resource::`$= dv.view('section', {file: '{{DATE}}-{{VALUE:🏗 New Project}}', searchTerm: 'reference', headerName: 'Resource', headerNamePlural: 'Resources', icon: '🔗'})`
+%%
+`=this.journal`
+`=this.resource`
 ## 📥 Action Items
 - [ ] 
