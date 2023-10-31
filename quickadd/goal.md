@@ -1,5 +1,4 @@
 ---
-title: {{VALUE:♊ Goal Alias}}
 reason: {{VALUE:Why this goal?}}
 type: goal
 status: {{VALUE:todo,wtg,ip,fin,hld,cmpt,blkd,na}}
