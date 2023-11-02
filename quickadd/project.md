@@ -1,5 +1,6 @@
 ---
-subtitle: {{VALUE:Project Subtitle}}
+title: {{VALUE:♊ Project Alias}}
+subtitle: {{VALUE:♊ Project Alias}}
 type: project
 status: {{VALUE:todo,wtg,ip,fin,hld,cmpt,blkd,na}}
 tags:
