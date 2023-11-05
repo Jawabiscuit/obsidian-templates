@@ -18,7 +18,7 @@ qcFileName = tp.date.now("YYYY-MM-DD") + "-" + qcFileName;
 
 console.log(qcFileName)
 
-await tp.file.move("/videos/" + qcFileName);
+await tp.file.rename(qcFileName);
 
 let duration = $("meta[itemprop='duration']").content.slice(2, -1);
 const timeStr = (time) => time.toString().padStart(2, '0');
