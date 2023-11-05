@@ -1,10 +1,9 @@
 <%*
 // Begin Declarations
-const path = require("path");
+// const path = require("path");
 const dv = app.plugins.plugins["dataview"].api;
 const title = tp.file.title;
 const folder = tp.file.folder(relative=true);
-const dirname = path.basename(folder);
 const type = "journal";
 const series = true;
 
@@ -17,15 +16,22 @@ function log(msg) {
     console.log(msg);
 }
 
-function capitalize_words (arr) {
+function capitalize_words(arr) {
     return arr.map(word => {
         return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
     });
+}
+
+function basename(fullPath) {
+    let base = fullPath.substring(fullPath.lastIndexOf("/") + 1);
+    if (base.lastIndexOf(".") != -1) base = base.substring(0, base.lastIndexOf("."));
+    return base;
 }
 // End Functions
 -%>
 <%*
 // Begin Prompts
+const dirname = basename(folder);
 const statuses = {
     "todo": "todo",
     "waiting": "wtg",
