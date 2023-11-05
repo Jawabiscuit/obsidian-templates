@@ -11,7 +11,7 @@ const series = true;
 let tags = [];
 // End Declarations
 -%>
-<%*f
+<%*
 // Begin Functions
 function log(msg) {
     console.log(msg);
