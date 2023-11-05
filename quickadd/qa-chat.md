@@ -1,8 +1,6 @@
 <%*
 // Begin Declarations
-const path = require("path");
-const folder = tp.file.folder(relative=true);
-const dirname = path.basename(folder);
+
 // End Declarations
 -%>
 <%*

@@ -1,8 +1,6 @@
 <%*
 // Begin Declarations
-const path = require("path");
 const folder = tp.file.folder(relative=true);
-const dirname = path.basename(folder);
 // End Declarations
 -%>
 <%*
@@ -10,10 +8,18 @@ const dirname = path.basename(folder);
 function log(msg) {
     console.log(msg);
 }
+
+// Credit: obsidian-periodic-notes
+function basename(fullPath) {
+    let base = fullPath.substring(fullPath.lastIndexOf("/") + 1);
+    if (base.lastIndexOf(".") != -1) base = base.substring(0, base.lastIndexOf("."));
+    return base;
+}
 // End Functions
 -%>
 <%*
 // Begin Prompts
+const dirname = basename(folder);
 const types = [
     "audio",
     "chat",

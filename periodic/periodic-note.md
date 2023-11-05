@@ -1,6 +1,5 @@
 <%*
 // Begin Declarations
-// const path = require("path");
 const dv = app.plugins.plugins["dataview"].api;
 const title = tp.file.title;
 const folder = tp.file.folder(relative=true);
