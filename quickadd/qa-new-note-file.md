@@ -1,9 +1,7 @@
 <%*
 // Begin Declarations
-const path = require("path");
 const dv = app.plugins.plugins["dataview"].api;
 const folder = tp.file.folder(relative=true);
-const dirname = path.basename(folder);
 
 let title = tp.file.title;
 let series = false;
@@ -21,11 +19,18 @@ function capitalize_words (arr) {
         return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
     });
 }
+
+function basename(fullPath) {
+    let base = fullPath.substring(fullPath.lastIndexOf("/") + 1);
+    if (base.lastIndexOf(".") != -1) base = base.substring(0, base.lastIndexOf("."));
+    return base;
+}
 // End Functions
 -%>
 <%*
 // Begin Prompts
 title = await tp.system.prompt("Title", title.toLowerCase());
+const dirname = basename(folder);
 
 const types = [
     "journal",
