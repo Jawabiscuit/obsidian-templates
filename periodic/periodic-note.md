@@ -98,7 +98,6 @@ modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %
 <%* tR += "---" %>
 <%*
 // Begin Progress Bar
-/*
 let progress;
 let file_date = new Date(title.match(/^(\d{4}-\d{2}-\d{2})/)[1] + "T00:00");
 
@@ -115,7 +114,6 @@ if (period == "d") {
 if (progress) {
     tR += `${progress}\n`;
 }
-*/
 // End Progress Bar
 -%>
 # <% tp.date.now("dddd Do MMMM YYYY", 0, title) %>
