@@ -1,0 +1,3 @@
+## 🏆 Brag
+## 📓 Journal
+## 💡 Capture
