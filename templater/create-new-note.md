@@ -8,8 +8,8 @@ type: <% newNoteData.type %>
 status: <% newNoteData.status %>
 tags: <% newNoteData.tags.length ? "\n    - " + newNoteData.tags.join("\n    - ") : null %>
 series: <% newNoteData.series %>
-created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
-modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>
+created: <% tp.date.now("YYYY-MM-DD HH:mm:ss") %>
+modification date: <% tp.file.last_modified_date("YYYY-MM-DD HH:mm:ss") %>
 aliases: <% newNoteData.aliases.length ? "\n    - " + newNoteData.aliases.join("\n    - ") : null %>
 <%* tR += "---" %>
 <%* if (newNoteData.dailyProgress) tR += `${newNoteData.dailyProgress}\n` -%>
