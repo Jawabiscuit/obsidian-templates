@@ -45,21 +45,21 @@ uploadDate = formatDate(uploadDate);
 -%>
 %%
 ogSiteName:: <% ogSiteName %>
-canonical:: <% canonical %>
-ogUrl:: <% ogUrl %>
-shortlinkUrl:: <% shortlinkUrl %>
+canonical:: "<% canonical %>"
+ogUrl:: "<% ogUrl %>"
+shortlinkUrl:: "<% shortlinkUrl %>"
 title:: <% title %>
 ogTitle:: <% ogTitle %>
 description:: <% description %>
 ogDescription:: <% ogDescription %>
-imageSrc:: <% imageSrc %>
-ogImage:: <% ogImage %>
-thumbnailUrl:: <% thumbnailUrl %>
+imageSrc:: "<% imageSrc %>"
+ogImage:: "<% ogImage %>"
+thumbnailUrl:: "<% thumbnailUrl %>"
 keywords:: <% keywords %>
 genre:: <% genre %>
 duration:: <% duration %>
 datePublished:: <% datePublished %>
 uploadDate:: <% uploadDate %>
-authorUrl:: <% authorUrl %>
+authorUrl:: "<% authorUrl %>"
 authorName:: <% authorName %>
 %%

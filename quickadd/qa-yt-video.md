@@ -7,7 +7,7 @@ let $ = s => doc.querySelector(s);
 
 let fileName = $("meta[property='og:title']").content;
 let qcFileName = fileName.replace(/:/g, "-");
-qcFileName = qcFileName.replace(/\?|\||#|‘|’/g, "");
+qcFileName = qcFileName.replace(/\?|\||#|‘|’|,|\./g, "");
 //qcFileName = qcFileName.replace(/#/g, "");
 //qcFileName = qcFileName.replace(/\?/g, "");
 titleName = qcFileName;
