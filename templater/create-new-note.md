@@ -16,6 +16,7 @@ aliases: <% newNoteData.aliases.length ? "\n  - " + newNoteData.aliases.join("\n
 cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses.join("\n  - ") : null %>
 <%* tR += "---" %>
 <%* if (newNoteData.dailyProgress) tR += `${newNoteData.dailyProgress}\n` -%>
+# <% newNoteData.alias %>
 %%
 <%* if (newNoteData.goal) tR += `${newNoteData.goal}\n` -%>
 <%* if (newNoteData.project) tR += `${newNoteData.project}\n` -%>
@@ -29,9 +30,8 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.progress) tR += `${newNoteData.progress}\n` -%>
 <%* if (newNoteData.img) tR += `${newNoteData.img}\n` -%>
 %%
-# <% newNoteData.alias %>
 <%* if (newNoteData.nav) tR+='`=this.nav`\n' -%>
-<%* if (newNoteData.taskProgress && newNoteData.type != "goal") tR += '`=this.bar`\n' -%>
+<%* if (newNoteData.taskProgress && newNoteData.type == "project") tR += '`=this.bar`\n' -%>
 <%* if (newNoteData.journal) tR += '`=this.journal`\n' -%>
 <%* if (newNoteData.resource) tR += '`=this.resource`\n' -%>
 <%* if (newNoteData.includeFile) tR += `${newNoteData.includeFile}\n` -%>
