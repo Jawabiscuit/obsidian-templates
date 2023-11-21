@@ -14,14 +14,19 @@ aliases: <% newNoteData.aliases.length ? "\n    - " + newNoteData.aliases.join("
 <%* tR += "---" %>
 <%* if (newNoteData.dailyProgress) tR += `${newNoteData.dailyProgress}\n` -%>
 %%
+<%* if (newNoteData.goal) tR += `${newNoteData.goal}\n` -%>
 <%* if (newNoteData.project) tR += `${newNoteData.project}\n` -%>
 <%* if (newNoteData.nav) tR += `${newNoteData.nav}\n` -%>
+<%* if (newNoteData.journal) tR += `${newNoteData.journal}\n` -%>
+<%* if (newNoteData.resource) tR += `${newNoteData.resource}\n` -%>
 <%* if (newNoteData.taskProgress) tR += `${newNoteData.taskProgress}\n` -%>
 <%* if (newNoteData.img) tR += `${newNoteData.img}\n` -%>
 %%
-<%* if (newNoteData.taskProgress) tR += '`=this.bar`\n' -%>
 # <% newNoteData.alias %>
 <%* if (newNoteData.nav) tR+='`=this.nav`\n' -%>
+<%* if (newNoteData.taskProgress) tR += '`=this.bar`\n' -%>
+<%* if (newNoteData.journal) tR += '`=this.journal`\n' -%>
+<%* if (newNoteData.resource) tR += '`=this.resource`\n' -%>
 <%* if (newNoteData.includeFile) tR += `${newNoteData.includeFile}\n` -%>
 <%* if (newNoteData.taskProgress) tR += '## 📥 Action Items\n' -%>
 <%* if (newNoteData.type === "daily") tR += await tp.file.include("[[day-planner]]") + '\n' -%>
