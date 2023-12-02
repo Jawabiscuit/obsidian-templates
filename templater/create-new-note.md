@@ -23,8 +23,7 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.projectLV) tR += `${newNoteData.projectLV}\n` -%>
 <%* if (newNoteData.projectTV) tR += `${newNoteData.projectTV}\n` -%>
 <%* if (newNoteData.nav) tR += `${newNoteData.nav}\n` -%>
-<%* if (newNoteData.journal) tR += `${newNoteData.journal}\n` -%>
-<%* if (newNoteData.resource) tR += `${newNoteData.resource}\n` -%>
+<%* if (newNoteData.projectDV) tR += `${newNoteData.projectDV}\n` -%>
 <%* if (newNoteData.taskProgress) tR += `${newNoteData.taskProgress}\n` -%>
 <%* if (newNoteData.target) tR += `${newNoteData.target}\n` -%>
 <%* if (newNoteData.progress) tR += `${newNoteData.progress}\n` -%>
@@ -32,8 +31,7 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 %%
 <%* if (newNoteData.nav) tR+='`=this.nav`\n' -%>
 <%* if (newNoteData.taskProgress && newNoteData.type == "project") tR += '`=this.bar`\n' -%>
-<%* if (newNoteData.journal) tR += '`=this.journal`\n' -%>
-<%* if (newNoteData.resource) tR += '`=this.resource`\n' -%>
+<%* if (newNoteData.projectDV) tR += '`=this.project-dv`\n' -%>
 <%* if (newNoteData.includeFile) tR += `${newNoteData.includeFile}\n` -%>
 <%* if (newNoteData.projectTV) tR += '`=this.project-tv`\n' -%>
 <%* if (newNoteData.taskProgress && newNoteData.type != "goal") tR += '## 📥 Action Items\n' -%>
