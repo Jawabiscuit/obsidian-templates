@@ -1,6 +1,7 @@
 <%*
 const choices = [
     "🔳",
+    "🎮 Game Dev",
     "👨‍🎓 Learning",
     "✏ Skills",
     "💪 Work Out",
