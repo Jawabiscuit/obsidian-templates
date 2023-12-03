@@ -27,6 +27,3 @@ Rules:
 4. Use markdown syntax
 5. 🧐, ask before generating a new 🤖.
 6. End every output with a question or a recommended next step.
-
-/new
-/start
