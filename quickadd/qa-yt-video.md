@@ -1,37 +1,69 @@
 <%*
-let url = await tp.system.clipboard();
-let page = await tp.obsidian.request({url});
-let p = new DOMParser();
-let doc = p. parseFromString(page, "text/html");
-let $ = s => doc.querySelector(s);
+function QCFileName(fileName) {
+    var qcTitle;
+    var qcFileName = fileName.replace(/:/g, "-");
+    qcFileName = qcFileName.replace(/\?|\!|\||#|‘|’|\\|\/|\(|\)/g, "");
+    qcTitle = qcFileName;
+    qcFileName = qcFileName.replace(/ /g, "-");
+    qcFileName = qcFileName.toLowerCase();
+    return [qcFileName, qcTitle];
+}
 
-let fileName = $("meta[property='og:title']").content;
-let qcFileName = fileName.replace(/:/g, "-");
-qcFileName = qcFileName.replace(/\?|\||#|‘|’|,|\./g, "");
-//qcFileName = qcFileName.replace(/#/g, "");
-//qcFileName = qcFileName.replace(/\?/g, "");
-titleName = qcFileName;
+const videoUrl = await tp.system.clipboard();
+const page = await tp.obsidian.request(videoUrl);
+const p = new DOMParser();
+const doc = p. parseFromString(page, "text/html");
+const $ = s => doc.querySelector(s);
 
-qcFileName = qcFileName.replace(/ /g, "-");
-qcFileName = qcFileName.toLowerCase();
-qcFileName = tp.date.now("YYYY-MM-DD") + "-" + qcFileName;
+const fileName = $("meta[property='og:title']").content;
+const [qcFileName, titleName] = QCFileName(fileName);
+const datedFileName = tp.date.now("YYYY-MM-DD") + "-" + qcFileName;
 
-console.log(qcFileName)
-
-await tp.file.rename(qcFileName);
+console.log(datedFileName);
+await tp.file.rename(datedFileName);
 
 let duration = $("meta[itemprop='duration']").content.slice(2, -1);
 const timeStr = (time) => time.toString().padStart(2, '0');
 let [minutes, seconds] = duration.split("M");
-let hours = Math.floor(Number(minutes) / 60);
+const hours = Math.floor(Number(minutes) / 60);
 minutes = (Number(minutes) % 60);
 duration = `${timeStr(minutes)}:${timeStr(seconds)}`;
-if (hours > 0) {duration = `${timeStr(hours)}:` + duration}
+if (hours > 0) {duration = `${timeStr(hours)}:` + duration};
+
+//** Begin Get Transcript */
+
+try {
+  const url = new URL(videoUrl);
+  const videoId = url.searchParams.get("v");
+  const transcriptBody = await requestUrl(`https://youtubetranscript.com/?v=${videoId}`).text;
+  const dp = new DOMParser();
+  const dom = dp.parseFromString(transcriptBody, "text/xml");
+
+  const transcriptEl = dom.getElementsByTagName("transcript")[0];
+  if (!transcriptEl) {
+    new Notice("No transcript found.");
+    // throw new Error("No transcript found.")
+  }
+
+  const textElements = transcriptEl.getElementsByTagName("text");
+  const textArr = [];
+  for (let i = 0; i < textElements.length; i++) {
+    const text = textElements[i];
+    textArr.push(text.textContent);
+  }
+
+  const transcript = textArr.join("\n");
+}
+catch (e) {
+  new Notice("No transcript found.");
+}
+
+//** End Get Transcript */
 -%>
 <%*
 tR += "---";
 %>
-title: <%* tR += titleName %>
+title: <% titleName %>
 status: watch-later
 tags: yt youtube
 series: false
