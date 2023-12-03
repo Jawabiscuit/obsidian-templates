@@ -2,11 +2,11 @@ const SYSTEM_PROMPTS = "Path to system prompts";
 const PROMPT_TEMPLATES = "Path to prompt templates";
 const MODEL = "Model";
 const STREAM = "Stream assistant messages";
-const SYSTEM_PROMPT = "System prompt. Do **not** use with system prompts. For long, complex system messages.";
-const TEMPERATURE = "(0-2.0) Sampling temperature. 0 is less creative, 2 is more creative and prone to hallucination";
-const TOP_P = "(0-1.0) Usually set to a high value (like 0.75) with the purpose of limiting the long tail of low-probability tokens that may be sampled.";
-const FREQUENCY_PENALTY = "(0-2.0) How much to penalize new tokens based on their existing frequency in the output. Higher number = less repitition";
-const PRESENCE_PENALTY = "(0-2.0) How much to penalize new tokens based on their appearance in the output. Higher number = less repitition";
+const SYSTEM_PROMPT = "System prompt.";
+const TEMPERATURE = "Sampling temperature (0-2.0). 0 is less creative, 2 is more creative and prone to hallucination";
+const TOP_P = "Top P (0-1.0). Usually set to a high value (like 0.75) with the purpose of limiting the long tail of low-probability tokens that may be sampled.";
+const FREQUENCY_PENALTY = "Frequency Penalty (0-2.0). How much to penalize new tokens based on their existing frequency in the output. Higher number = less repitition";
+const PRESENCE_PENALTY = "Presence Penalty (0-2.0). How much to penalize new tokens based on their appearance in the output. Higher number = less repitition";
 const MAX_TOKENS = "Max number of tokens to generate in the output. 1 token ~ 4 chars. Check model context length, at minimum, model_ctx <= system_prompt + prompt_template / 2";
 const STOP = "Stop character (E.g. DALL-E requires this)";
 const MODELS = [
@@ -91,10 +91,8 @@ async function run(params, settings) {
         .filter(p => p.path.startsWith(settings[PROMPT_TEMPLATES]))
         .sort(p => p.stat.mtime, "desc");
     const template = await API.suggester(t => t.basename, templates);
-    if (!template) {
-        new Notice(`No prompt template. Stopping.`);
-        return;
-    }
+    if (!template)
+        new Notice(`No prompt template selected.`);
 
     var qcSysText;
     if (!settings[SYSTEM_PROMPT]) {
@@ -104,14 +102,14 @@ async function run(params, settings) {
             .filter(p => p.path.startsWith(settings[SYSTEM_PROMPTS]))
             .sort(p => p.stat.mtime, "desc");
         const sysPrompt = await API.suggester(t => t.basename, sysPrompts);
-        if (!sysPrompt) {
-            new Notice(`No system prompt. Stopping.`);
-            return;
-        }
-        const sysText = await app.vault.cachedRead(sysPrompt);
-        if (!sysText)
+        if (!sysPrompt)
+            new Notice(`No system prompt selected.`);
+        const sysText = sysPrompt ? await app.vault.cachedRead(sysPrompt) : null;
+        if (!sysText) {
             new Notice(`Empty system prompt.`);
-        qcSysText = sysText.replace(/  +/g, ' ').replace(/\n/g, '');
+        } else {
+            qcSysText = sysText.replace(/  +/g, ' ').replace(/\n/g, '');
+        }
     } else {
         qcSysText = settings[SYSTEM_PROMPT];
     }
@@ -119,7 +117,7 @@ async function run(params, settings) {
     if (MODELS.includes("Ask"))
         MODELS.remove("Ask");
 
-    params.variables["prompt_template"] = params.app.fileManager.generateMarkdownLink(template, "");
+    params.variables["prompt_template"] = template ? params.app.fileManager.generateMarkdownLink(template, "") : null;
     params.variables["model"] = settings[MODEL];
     params.variables["models"] = MODELS;
     params.variables["temp"] = settings[TEMPERATURE];
