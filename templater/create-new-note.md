@@ -35,4 +35,4 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.includeFile) tR += `${newNoteData.includeFile}\n` -%>
 <%* if (newNoteData.projectTV) tR += '`=this.project-tv`\n' -%>
 <%* if (newNoteData.taskProgress && newNoteData.type != "goal") tR += '## 📥 Action Items\n' -%>
-<%* if (newNoteData.type === "daily") tR += await tp.file.include("[[day-planner]]") + '\n' -%>
+<%* if (newNoteData.type === "daily" && newNoteData.taskProgress) tR += await tp.file.include("[[day-planner]]") + '\n' -%>

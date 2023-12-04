@@ -31,8 +31,7 @@ template: "{{value:prompt_template}}"
 %%
 <%* if (newNoteData.project) tR += `${newNoteData.project}\n` -%>
 %%
-<%* if ("{{value:prompt_template}}") tR += await tp.file.include(`{{value:prompt_template}}`);
-%>
+<%* if ("{{value:prompt_template}}") tR += await tp.file.include(`{{value:prompt_template}}`) + '\n' %>
 ```js quickadd
 let model = this.variables["model"];
 let models = this.variables["models"];
