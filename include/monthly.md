@@ -1,4 +1,3 @@
 ## 🏆 Brag
-## 📓 Journal
-## 🆕 Notes Created
+## 🗻 Summary
 ## 💡 Capture

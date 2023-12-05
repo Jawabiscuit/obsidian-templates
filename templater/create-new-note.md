@@ -24,6 +24,7 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.projectTV) tR += `${newNoteData.projectTV}\n` -%>
 <%* if (newNoteData.nav) tR += `${newNoteData.nav}\n` -%>
 <%* if (newNoteData.projectDV) tR += `${newNoteData.projectDV}\n` -%>
+<%* if (newNoteData.overview) tR += `${newNoteData.overview}\n` -%>
 <%* if (newNoteData.taskProgress) tR += `${newNoteData.taskProgress}\n` -%>
 <%* if (newNoteData.target) tR += `${newNoteData.target}\n` -%>
 <%* if (newNoteData.progress) tR += `${newNoteData.progress}\n` -%>
@@ -33,6 +34,7 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.taskProgress && newNoteData.type == "project") tR += '`=this.bar`\n' -%>
 <%* if (newNoteData.projectDV) tR += '`=this.project-dv`\n' -%>
 <%* if (newNoteData.includeFile) tR += `${newNoteData.includeFile}\n` -%>
+<%* if (newNoteData.overview) tR += '`=this.overview`\n' -%>
 <%* if (newNoteData.projectTV) tR += '`=this.project-tv`\n' -%>
 <%* if (newNoteData.taskProgress && newNoteData.type != "goal") tR += '## 📥 Action Items\n' -%>
 <%* if (newNoteData.type === "daily" && newNoteData.taskProgress) tR += await tp.file.include("[[day-planner]]") + '\n' -%>

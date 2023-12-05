@@ -1,4 +1,2 @@
-## 📓 Journal
-## 🆕 Notes Created
-## 🧛‍♂🧛‍♀ Meetings
+## 🗻 Summary
 ## 💡 Capture
