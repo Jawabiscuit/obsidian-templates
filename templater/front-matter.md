@@ -50,7 +50,9 @@ const statuses = {
     "hold": "hld",
     "complete": "cmpt",
     "blocked": "blkd",
-    "n/a": "na"
+    "n/a": "na",
+    "watched": "watched",
+    "watch-later": "watch-later",
 };
 const status = type != "reference" ? await
     tp.system.suggester(
@@ -83,6 +85,6 @@ type: <% type %>
 status: <% status %>
 tags: [<% tags.join(", ") %>]
 series: <% series %>
-created: <% tp.file.creation_date("YYYY-MM-DD HH:mm") %>
-modification date: <% tp.file.last_modified_date("dddd Do MMMM YYYY HH:mm:ss") %>
+created: <% tp.file.creation_date("YYYY-MM-DD HH:mm:ss") %>
+modification date: <% tp.file.last_modified_date("YYYY-MM-DD HH:mm:ss") %>
 <%* tR += "---" %>
