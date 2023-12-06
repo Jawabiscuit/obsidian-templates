@@ -71,7 +71,7 @@ module.exports = {
             },
             [MAX_TOKENS]: {
                 type: "text",
-                defaultValue: 4096,
+                defaultValue: null,
                 placeholder: 4096,
             },
             [STOP]: {
@@ -83,33 +83,33 @@ module.exports = {
     },
 };
 
+// eslint-disable-next-line require-jsdoc
 async function run(params, settings) {
     const API = params.quickAddApi;
 
-    if (settings[PROMPT_TEMPLATES] && !settings[PROMPT_TEMPLATES].endsWith("/")) settings[PROMPT_TEMPLATES] += "/"
+    if (settings[PROMPT_TEMPLATES] && !settings[PROMPT_TEMPLATES].endsWith("/")) settings[PROMPT_TEMPLATES] += "/";
     const templates = params.app.vault.getMarkdownFiles()
-        .filter(p => p.path.startsWith(settings[PROMPT_TEMPLATES]))
-        .sort(p => p.stat.mtime, "desc");
-    const template = await API.suggester(t => t.basename, templates);
+        .filter((p) => p.path.startsWith(settings[PROMPT_TEMPLATES]))
+        .sort((p) => p.stat.mtime, "desc");
+    const template = await API.suggester((t) => t.basename, templates);
     if (!template)
         new Notice(`No prompt template selected.`);
 
-    var qcSysText;
+    let qcSysText;
     if (!settings[SYSTEM_PROMPT]) {
         if (settings[SYSTEM_PROMPTS] && !settings[SYSTEM_PROMPTS].endsWith("/"))
             settings[SYSTEM_PROMPTS] += "/";
         const sysPrompts = params.app.vault.getMarkdownFiles()
-            .filter(p => p.path.startsWith(settings[SYSTEM_PROMPTS]))
-            .sort(p => p.stat.mtime, "desc");
-        const sysPrompt = await API.suggester(t => t.basename, sysPrompts);
+            .filter((p) => p.path.startsWith(settings[SYSTEM_PROMPTS]))
+            .sort((p) => p.stat.mtime, "desc");
+        const sysPrompt = await API.suggester((t) => t.basename, sysPrompts);
         if (!sysPrompt)
             new Notice(`No system prompt selected.`);
         const sysText = sysPrompt ? await app.vault.cachedRead(sysPrompt) : null;
-        if (!sysText) {
+        if (!sysText)
             new Notice(`Empty system prompt.`);
-        } else {
-            qcSysText = sysText.replace(/  +/g, ' ').replace(/\n/g, '');
-        }
+        else
+            qcSysText = sysText.replace(/  +/g, " ").replace(/\n/g, "");
     } else {
         qcSysText = settings[SYSTEM_PROMPT];
     }

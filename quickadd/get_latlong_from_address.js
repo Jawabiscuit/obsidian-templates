@@ -21,16 +21,17 @@ module.exports = async (params) => {
     }
 
     await createYamlProperty("location", `[${lat}, ${lon}]`, activeFile);
-}
+};
 
 
+// eslint-disable-next-line require-jsdoc
 async function apiGet(searchQuery) {
-    let finalURL = new URL(`https://nominatim.openstreetmap.org/search?q=${searchQuery}&format=json`);
-    
+    const finalURL = new URL(`https://nominatim.openstreetmap.org/search?q=${searchQuery}&format=json`);
+
     return await fetch(finalURL, {
-        method: 'GET', cache: 'no-cache',
+        method: "GET", cache: "no-cache",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
     }).then(async (res) => await res.json());
 }

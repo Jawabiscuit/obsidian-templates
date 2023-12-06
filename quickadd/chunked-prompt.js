@@ -92,6 +92,7 @@ module.exports = {
     },
 };
 
+// eslint-disable-next-line require-jsdoc
 async function run(params, settings) {
     const API = params.quickAddApi;
 
@@ -117,8 +118,8 @@ async function run(params, settings) {
                 "top_p": parseFloat(settings[TOP_P]),
                 "frequency_penalty": parseFloat(settings[FREQUENCY_PENALTY]),
                 "presence_penalty": parseFloat(settings[PRESENCE_PENALTY]),
-            }
-        }
+            },
+        },
     );
 
     params.variables["model"] = settings[MODEL];
