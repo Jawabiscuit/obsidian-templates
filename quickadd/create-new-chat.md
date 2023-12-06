@@ -16,7 +16,7 @@ aliases: <% newNoteData.aliases.length ? "\n  - " + newNoteData.aliases.join("\n
 cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses.join("\n  - ") : null %>
 temperature: {{value:temp}}
 top_p: {{value:top_p}}
-max_tokens: {{value:max_tokens}}
+max_tokens: {{value:512,1024,2048,4096}}
 presence_penalty: {{value:presence_p}}
 frequency_penalty: {{value:frequency_p}}
 stream: {{value:stream}}
