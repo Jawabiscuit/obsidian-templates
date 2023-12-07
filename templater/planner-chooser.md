@@ -8,7 +8,7 @@ const choices = [
     "🍗 Lunch",
     "💬 Interview",
     "🌐 Website",
-    "🔮 Planning",
+    "🔮 Obsidian",
     "📰 News & Jobs",
     "🚗 Errands",
     "⏪ Review"];
