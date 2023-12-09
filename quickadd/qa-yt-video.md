@@ -19,7 +19,6 @@ const fileName = $("meta[property='og:title']").content;
 const [qcFileName, titleName] = QCFileName(fileName);
 const datedFileName = tp.date.now("YYYY-MM-DD") + "-" + qcFileName;
 
-console.log(datedFileName);
 await tp.file.rename(datedFileName);
 
 let duration = $("meta[itemprop='duration']").content.slice(2, -1);
