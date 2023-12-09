@@ -11,7 +11,6 @@ tags: <% newNoteData.tags.length ? "\n  - " + newNoteData.tags.join("\n  - ") : 
 series: <% newNoteData.series %>
 created: <% tp.date.now("YYYY-MM-DD HH:mm:ss") %>
 modification date: <% tp.file.last_modified_date("YYYY-MM-DD HH:mm:ss") %>
-<%* if (newNoteData.timeSpan) tR += `timespan: ${newNoteData.timeSpan}\n` -%>
 aliases: <% newNoteData.aliases.length ? "\n  - " + newNoteData.aliases.join("\n  - ") : null %>
 cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses.join("\n  - ") : null %>
 temperature: {{value:temp}}
