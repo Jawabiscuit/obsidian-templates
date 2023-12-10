@@ -2,7 +2,7 @@
 Here is a list of Obsidian (Markdown) links to pages related to {{value:link}}.
 Please use these to give me 10 writing prompts in bullet form concerning {{value:link}}.
 
-Use the links in paragraphs as part of the sentences.
+Use the links provided when generating the writing prompts.
 
 ```js quickadd
 // Use a shorthand for the DataView API
