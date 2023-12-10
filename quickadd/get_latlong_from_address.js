@@ -1,4 +1,4 @@
-module.exports = async (params) => {
+module.exports = async params => {
     const {createYamlProperty} = params.app.plugins.plugins["metaedit"].api;
     const address = await params.quickAddApi.inputPrompt("🏠 Address");
     if (!address) {
@@ -33,5 +33,5 @@ async function apiGet(searchQuery) {
         headers: {
             "Content-Type": "application/json",
         },
-    }).then(async (res) => await res.json());
+    }).then(async res => await res.json());
 }
