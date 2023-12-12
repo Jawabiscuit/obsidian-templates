@@ -1,12 +1,12 @@
 <%*
-function QCFileName(fileName) {
-    var qcTitle;
-    var qcFileName = fileName.replace(/:/g, "-");
-    qcFileName = qcFileName.replace(/\?|\!|\||#|‘|’|\\|\/|\(|\)/g, "");
-    qcTitle = qcFileName;
-    qcFileName = qcFileName.replace(/ /g, "-");
-    qcFileName = qcFileName.toLowerCase();
-    return [qcFileName, qcTitle];
+function textToFilename(text) {
+    return sanitizeText(text)
+        .replace(/ /g, "-").toLowerCase()
+        .replace(/[--]+/g, "-");
+}
+
+function sanitizeText(text) {
+    return text.replace(illegalCharacterRegex, "").toLowerCase();
 }
 
 const videoUrl = await tp.system.clipboard();
@@ -15,8 +15,9 @@ const p = new DOMParser();
 const doc = p. parseFromString(page, "text/html");
 const $ = s => doc.querySelector(s);
 
-const fileName = $("meta[property='og:title']").content;
-const [qcFileName, titleName] = QCFileName(fileName);
+const title = $("meta[property='og:title']").content;
+const titleName = sanitizeText(title);
+const qcFileName = textToFilename(title);
 const datedFileName = tp.date.now("YYYY-MM-DD") + "-" + qcFileName;
 
 await tp.file.rename(datedFileName);
