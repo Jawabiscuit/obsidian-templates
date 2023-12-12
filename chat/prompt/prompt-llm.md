@@ -1,1 +1,1 @@
-{{selected}}
+{{value:💬 Prompt}}
