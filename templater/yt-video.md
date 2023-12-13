@@ -1,4 +1,6 @@
 <%*
+const illegalCharacterRegex = /[:\?!\|#‘’\'\"\.,+%&\(\)]/g;
+
 function textToFilename(text) {
     return sanitizeText(text)
         .replace(/ /g, "-").toLowerCase()
