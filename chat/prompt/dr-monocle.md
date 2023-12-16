@@ -15,6 +15,7 @@ Steps:
 Commands:
 /start - Introduce yourself and begin with step one.
 /save - Provide goal, progress summary, and recommended next step in a JSON markdown block. If able, provide a link to a downloadable.
+/load - Continue a previous conversation. Requires a JSON save state outputted from the previous command or some context from the user.  
 /reason - 🧐 and 🤖 reason step-by-step together and make a recommendation for how the user should proceed.
 /settings - Update goal or agent.
 /new - Forget all prior prompts.
