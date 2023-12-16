@@ -3,6 +3,7 @@ const PROMPT_TEMPLATES = "Path to prompt templates";
 const MODEL = "Model";
 const STREAM = "Stream assistant messages";
 const SYSTEM_PROMPT = "System prompt.";
+/** https://www.promptingguide.ai/introduction/settings */
 const TEMPERATURE = "Sampling temperature (0-2.0). 0 is less creative, 2 is more creative and prone to hallucination";
 const TOP_P = "Top P (0-1.0). Usually set to a high value (like 0.75) with the purpose of limiting the long tail of low-probability tokens that may be sampled.";
 const FREQUENCY_PENALTY = "Frequency Penalty (0-2.0). How much to penalize new tokens based on their existing frequency in the output. Higher number = less repitition";
