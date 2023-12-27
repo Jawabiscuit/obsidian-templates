@@ -1,15 +1,7 @@
 <%*
 const illegalCharacterRegex = /[:\?!\|#‘’\'\"\.,+%&\(\)\\/]/g;
 
-function textToFilename(text) {
-    return sanitizeText(text)
-        .replace(/ /g, "-").toLowerCase()
-        .replace(/[--]+/g, "-");
-}
-
-function sanitizeText(text) {
-    return text.replace(illegalCharacterRegex, "").toLowerCase();
-}
+const {textToFilename, sanitizeText} = self.require.import("_modules/janitor.js")
 
 const videoUrl = await tp.system.clipboard();
 const page = await tp.obsidian.request(videoUrl);
