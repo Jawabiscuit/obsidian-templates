@@ -1,7 +1,8 @@
 <%*
 const dv = app.plugins.plugins["dataview"].api;
 const statuses = self.require("_modules/status.js");
-const newNoteData = await tp.user.newNoteData(tp, dv);
+const utils = self.require("_modules/text.js");
+const newNoteData = await tp.user.newNoteData(tp, dv, utils);
 -%>
 <%* tR += "---" %>
 title: <% newNoteData.title %>

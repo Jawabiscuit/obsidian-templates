@@ -1,6 +1,5 @@
 <%*
-const {textToFilename, sanitizeText} = self.require("_modules/janitor.js");
-const {capitalize} = self.require("_modules/text.js");
+const {capitalize, textToFilename, sanitizeText} = self.require("_modules/text.js");
 
 const videoUrl = await tp.system.clipboard();
 const page = await tp.obsidian.request(videoUrl);
