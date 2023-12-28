@@ -2,7 +2,7 @@ const statuses = self.require("_modules/status.js");
 const categories = self.require("_modules/category.js");
 
 module.exports = async params => {
-    const {autoprop, getPropertiesInFile, update} = params.app.plugins.plugins["metaedit"].api;
+    const {getPropertiesInFile, update} = params.app.plugins.plugins["metaedit"].api;
     const activeFile = params.app.workspace.getActiveFile(); // TFile
     if (!activeFile) {
         new Notice("No active file", 5000);

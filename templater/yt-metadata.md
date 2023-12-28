@@ -22,8 +22,8 @@ let duration = $("meta[itemprop='duration']").content.slice(2, -1);
 let authorUrl = $("span[itemprop='author'] > link[itemprop='url']").href;
 let authorName = $("span[itemprop='author'] > link[itemprop='name']").getAttribute("content"); // Dot notation doesn't work here
 let thumbnailUrl = $("link[itemprop='thumbnailUrl']").href;
-let datePublished = $("meta[itemprop='datePublished']").content;
-let uploadDate = $("meta[itemprop='uploadDate']").content;
+let datePublished = moment($("meta[itemprop='datePublished']").content);
+let uploadDate = moment($("meta[itemprop='uploadDate']").content);
 let genre = $("meta[itemprop='genre']").content;
 
 const timeStr = (time) => time.toString().padStart(2, '0');
@@ -32,34 +32,24 @@ let hours = Math.floor(Number(minutes) / 60);
 minutes = (Number(minutes) % 60);
 duration = `${timeStr(minutes)}:${timeStr(seconds)}`;
 if (hours > 0) {duration = `${timeStr(hours)}:` + duration}
-
-const formatDate = (date) => {
-    let [year, month, day] = date.split('-');
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let monthName = months[Number(month) - 1];
-    return `${day} ${monthName} ${year}`;
-};
-datePublished = formatDate(datePublished);
-uploadDate = formatDate(uploadDate);
-
 -%>
-|      var      | value               |
-|:-------------:|:------------------- |
-|  ogSiteName   | <% ogSiteName %>    |
-|   canonical   | <% canonical %>     |
-|     ogUrl     | <% ogUrl %>         |
-| shortlinkUrl  | <% shortlinkUrl %>  |
-|     title     | <% title %>         |
-|    ogTitle    | <% ogTitle %>       |
-|  description  | <% description %>   |
-| ogDescription | <% ogDescription %> |
-|   imageSrc    | <% imageSrc %>      |
-|    ogImage    | <% ogImage %>       |
-| thumbnailUrl  | <% thumbnailUrl %>  |
-|   keywords    | <% keywords %>      |
-|     genre     | <% genre %>         |
-|   duration    | <% duration %>      |
-| datePublished | <% datePublished %> |
-|  uploadDate   | <% uploadDate %>    |
-|   authorUrl   | <% authorUrl %>     |
-|  authorName   | <% authorName %>    |
+|      var      |                  value                   |
+|:-------------:|:----------------------------------------:|
+|  ogSiteName   | <% ogSiteName %>                         |
+|   canonical   | <% canonical %>                          |
+|     ogUrl     | <% ogUrl %>                              |
+| shortlinkUrl  | <% shortlinkUrl %>                       |
+|     title     | <% title %>                              |
+|    ogTitle    | <% ogTitle %>                            |
+|  description  | <% description %>                        |
+| ogDescription | <% ogDescription %>                      |
+|   imageSrc    | <% imageSrc %>                           |
+|    ogImage    | <% ogImage %>                            |
+| thumbnailUrl  | <% thumbnailUrl %>                       |
+|   keywords    | <% keywords %>                           |
+|     genre     | <% genre %>                              |
+|   duration    | <% duration %>                           |
+| datePublished | <% datePublished.format("YYYY-MM-DD") %> |
+|  uploadDate   | <% uploadDate.format("YYYY-MM-DD") %>    |
+|   authorUrl   | <% authorUrl %>                          |
+|  authorName   | <% authorName %>                         |

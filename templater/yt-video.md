@@ -1,7 +1,6 @@
 <%*
-const illegalCharacterRegex = /[:\?!\|#‘’\'\"\.,+%&\(\)\\/]/g;
-
-const {textToFilename, sanitizeText} = self.require.import("_modules/janitor.js")
+const {textToFilename, sanitizeText} = self.require("_modules/janitor.js");
+const {capitalize} = self.require("_modules/text.js");
 
 const videoUrl = await tp.system.clipboard();
 const page = await tp.obsidian.request(videoUrl);
@@ -23,6 +22,8 @@ const hours = Math.floor(Number(minutes) / 60);
 minutes = (Number(minutes) % 60);
 duration = `${timeStr(minutes)}:${timeStr(seconds)}`;
 if (hours > 0) {duration = `${timeStr(hours)}:` + duration};
+
+uploadDate = moment($("meta[itemprop='uploadDate']").content);
 
 //** Begin Get Transcript */
 
@@ -57,22 +58,21 @@ catch (e) {
 <%*
 tR += "---";
 %>
-title: <% titleName %>
+title: <% capitalize(titleName) %>
 status: watch-later
-tags: yt youtube
+tags: yt youtube video
 series: false
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 url: <%
 $("link[rel='shortLinkUrl']").href %>
 channel: <%
 $("link[itemprop='name']").getAttribute("content") %>
-published: "<%
-$("meta[itemprop='uploadDate']").content.slice(0, 4) %>"
+published: <% uploadDate.format("YYYY-MM-DD") %>
 duration: <% duration %>
 <%*
 tR += "---";
 %>
-# <% titleName %>
+# <% capitalize(titleName) %>
 
 [<%
 $("link[itemprop='name']").getAttribute("content") %>, ▶ *<%
@@ -82,4 +82,6 @@ $("link[rel='shortLinkUrl']").href %>)
 
 ![](<% $("meta[property='og:url']").content.split('&')[0] %>)
 
+```timestamp-url
 <% tp.system.clipboard() %>
+```
