@@ -1,0 +1,1 @@
+overview::`$= dv.view("overview", {file: "<% tp.file.title %>", interval: "0", tags: ["reference", "journal", "chat", "yt"]})`

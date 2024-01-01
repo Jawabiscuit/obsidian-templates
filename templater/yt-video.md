@@ -84,3 +84,9 @@ $("link[rel='shortLinkUrl']").href %>)
 ```timestamp-url
 <% tp.system.clipboard() %>
 ```
+
+%%
+```sh
+yt-dlp <% tp.system.clipboard() %> -o videos/"%(title)s.mp4"
+```
+%%
