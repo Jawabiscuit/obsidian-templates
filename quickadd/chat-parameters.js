@@ -26,15 +26,15 @@ module.exports = {
         name: `Chat Parameters`,
         author: `Jonas Avrin`,
         options: {
-            [PROMPT_TEMPLATES]: {
-                type: "text",
-                defaultValue: "_templates/chat/prompt",
-                placeholder: "_templates/chat/prompt",
-            },
             [SYSTEM_PROMPTS]: {
                 type: "text",
                 defaultValue: "_templates/chat/system",
                 placeholder: "_templates/chat/system",
+            },
+            [PROMPT_TEMPLATES]: {
+                type: "text",
+                defaultValue: "_templates/chat/prompt",
+                placeholder: "_templates/chat/prompt",
             },
             [MODEL]: {
                 type: "dropdown",
@@ -118,6 +118,7 @@ async function run(params, settings) {
     if (MODELS.includes("Ask"))
         MODELS.remove("Ask");
 
+    params.variables["system_prompt"] = qcSysText;
     params.variables["prompt_template"] = template ? params.app.fileManager.generateMarkdownLink(template, "") : null;
     params.variables["model"] = settings[MODEL];
     params.variables["models"] = MODELS;
@@ -126,7 +127,6 @@ async function run(params, settings) {
     params.variables["frequency_p"] = settings[FREQUENCY_PENALTY];
     params.variables["presence_p"] = settings[PRESENCE_PENALTY];
     params.variables["stream"] = settings[STREAM];
-    params.variables["system_prompt"] = qcSysText;
     params.variables["max_tokens"] = settings[MAX_TOKENS];
     // Don't want prompt (default null)
     // params.variables["stop"] = settings[STOP];
