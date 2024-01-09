@@ -2,7 +2,9 @@
 const dv = app.plugins.plugins["dataview"].api;
 const statuses = self.require("_modules/status.js");
 const utils = self.require("_modules/text.js");
-const newNoteData = await tp.user.newNoteData(tp, dv, utils);
+const category = self.require("_modules/category.js");
+const {template} = self.require("_modules/template.js");
+const newNoteData = await tp.user.newNoteData(tp, dv, utils, category, template);
 -%>
 <%* tR += "---" %>
 title: <% newNoteData.title %>
@@ -16,6 +18,7 @@ modification date: <% tp.file.last_modified_date("YYYY-MM-DD HH:mm:ss") %>
 <%* if (newNoteData.timeSpan) tR += `timespan: ${newNoteData.timeSpan}\n` -%>
 aliases: <% newNoteData.aliases.length ? "\n  - " + newNoteData.aliases.join("\n  - ") : null %>
 cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses.join("\n  - ") : null %>
+<%* if (newNoteData.frontMatter) { for (const [key, value] of Object.entries(newNoteData.frontMatter)) { tR += `${key}: ${value}\n` } } -%>
 <%* tR += "---" %>
 <%* if (newNoteData.dailyProgress) tR += `${newNoteData.dailyProgress}\n` -%>
 # <% newNoteData.alias %>
@@ -31,6 +34,8 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.target) tR += `${newNoteData.target}\n` -%>
 <%* if (newNoteData.progress) tR += `${newNoteData.progress}\n` -%>
 <%* if (newNoteData.img) tR += `${newNoteData.img}\n` -%>
+<%* if (newNoteData.postsTV) tR += `${newNoteData.postsTV}\n` -%>
+<%* if (newNoteData.inlineData) { for (const [key, value] of Object.entries(newNoteData.inlineData)) { tR += `${key}:: ${value}\n` } } -%>
 %%
 <%* if (newNoteData.nav) tR+='`=this.nav`\n' -%>
 <%* if (newNoteData.taskProgress && newNoteData.type == "project") tR += '`=this.bar`\n' -%>
@@ -40,3 +45,4 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 <%* if (newNoteData.type === "daily" && newNoteData.taskProgress) tR += await tp.file.include("[[day-planner]]") + '\n' -%>
 <%* if (newNoteData.overview) tR += '\n---\n\n`=this.overview`\n' -%>
 <%* if (newNoteData.projectTV) tR += '\n---\n\n`=this.project-tv`\n' -%>
+<%* if (newNoteData.postsTV) tR += '\n---\n\n`=this.posts`\n' -%>
