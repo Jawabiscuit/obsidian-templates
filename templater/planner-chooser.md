@@ -5,6 +5,7 @@ const choices = [
     "👨‍🎓 Learning",
     "✏ Skills",
     "💻 Research",
+    "💻 Programming",
     "💪 Work Out",
     "🍗 Lunch",
     "💬 Interview",
