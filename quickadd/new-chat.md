@@ -1,9 +1,12 @@
 <%*
 const dv = app.plugins.plugins["dataview"].api;
+const modalForm = app.plugins.plugins.modalforms.api;
+const statuses = self.require("_modules/status.js");
 const utils = self.require("_modules/text.js");
 const category = self.require("_modules/category.js");
+const duration = self.require("_modules/duration.js");
 const {template} = self.require("_modules/template.js");
-const newNoteData = await tp.user.newNoteData(tp, dv, utils, category, template);
+const newNoteData = await tp.user.newNoteData(tp, dv, utils, category, template, modalForm, duration);
 -%>
 <%* tR += "---" %>
 title: <% newNoteData.title %>

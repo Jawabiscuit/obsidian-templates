@@ -1,9 +1,12 @@
 <%*
 const dv = app.plugins.plugins["dataview"].api;
+const modalForm = app.plugins.plugins.modalforms.api;
+const statuses = self.require("_modules/status.js");
 const utils = self.require("_modules/text.js");
 const category = self.require("_modules/category.js");
+const duration = self.require("_modules/duration.js");
 const {template} = self.require("_modules/template.js");
-const newNoteData = await tp.user.newNoteData(tp, dv, utils, category, template);
+const newNoteData = await tp.user.newNoteData(tp, dv, utils, category, template, modalForm, duration);
 -%>
 <%* tR += "---" %>
 title: <% newNoteData.title %>
@@ -22,7 +25,7 @@ cssClasses: <% newNoteData.cssClasses.length ? "\n  - " + newNoteData.cssClasses
 %%
 <%* if (newNoteData.project) tR += `${newNoteData.project}\n` -%>
 <%* if (newNoteData.img) tR += `${newNoteData.img}\n` -%>
-author:: {{VALUE:author}}
+author:: {{VALUE:Author}}
 rating::
 <%* if (newNoteData.journal) tR += `${newNoteData.journal}\n` -%>
 <%* if (newNoteData.resource) tR += `${newNoteData.resource}\n` -%>
