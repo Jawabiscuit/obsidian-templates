@@ -1,3 +1,5 @@
 ## 🏆 Brag
+
 ## 🗻 Summary
+
 ## 💡 Capture

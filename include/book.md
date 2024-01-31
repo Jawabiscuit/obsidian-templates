@@ -1,7 +1,7 @@
-## Thoughts
+## 🧠 Thoughts
 
-## Actions Taken / Changes
+## 🏃‍♀️ Actions Taken / Changes
 
-## Summary of Key Points
+## 🔻 Summary of Key Points
 
-## Highlights & Notes
+## ✨ Highlights & Notes

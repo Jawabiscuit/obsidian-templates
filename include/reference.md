@@ -1,1 +1,5 @@
-## 🔗 Links
+## 📖 Books
+
+## 📰 Articles
+
+## 🌐 Internet

@@ -1,2 +1,3 @@
 ## 📓 Journal
+
 ## 💡 Capture

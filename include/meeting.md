@@ -1,3 +1,5 @@
-## 👨‍💼 Attendance
+## 👨‍🎤👩‍🎤 Attendance
+
 ## 🕚 Minutes
+
 ## 💡 Capture
