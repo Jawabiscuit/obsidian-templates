@@ -1,12 +1,25 @@
-#### Challenges
+## Mechanics
+
+## Experience
+- 
+
+## High Level
 1. 
-#### Mistakes
+
+## Challenges
 1. 
-#### Enjoyed
+
+## Mistakes
 1. 
-#### Leadership
+
+## Enjoyed
 1. 
-#### Conflicts
+
+## Leadership
 1. 
-#### What you'd do different
-1. 
+
+## Conflicts
+- 
+
+## What you'd do different
+- 
