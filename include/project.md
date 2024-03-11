@@ -6,6 +6,4 @@
 
 ## 💡 Ideas
 
-## 🔻 Summary
-
 ## 🚶‍♀️ Next Steps
