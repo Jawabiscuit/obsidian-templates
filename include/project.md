@@ -1,3 +1,5 @@
+## 🎯 Objective
+
 ## 🗻 Principles
 
 ## ♟ Strategy
